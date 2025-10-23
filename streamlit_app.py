@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-# from streamlit.connections import SQLConnection # Not strictly needed for the simplified API
+# --- FIX: Explicitly import the Google Sheets connection class to ensure registration ---
+from st_gsheets_connection import GSheetsConnection 
 
 # --- CONFIGURATION AND INSTRUCTIONS ---
 
@@ -28,6 +29,7 @@ def load_data():
     """
     try:
         # 1. Initialize the Google Sheets connection (requires 'gsheets' config in secrets.toml)
+        # Note: The 'type' parameter is now optional/implied due to the explicit import above.
         conn = st.connection('gsheets', type='sheets')
         
         # 2. Query the data from the specified Sheet Name
